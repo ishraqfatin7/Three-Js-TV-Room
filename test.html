@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Three.js Room Scene</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // Scene setup
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xaaaaaa); // Set a background color to see if the renderer is working
+
+      // Camera setup
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.set(0, 5, 15);
+
+      // Renderer setup
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Lighting setup
+      const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+      scene.add(ambientLight);
+
+      const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+      pointLight.position.set(10, 10, 10);
+      scene.add(pointLight);
+
+      // Floor setup
+      const floorGeometry = new THREE.PlaneGeometry(20, 20);
+      const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x808080 });
+      const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+      floor.rotation.x = -Math.PI / 2;
+      scene.add(floor);
+
+      // Wall setup
+      function createWall(width, height, depth, color, position) {
+        const geometry = new THREE.BoxGeometry(width, height, depth);
+        const material = new THREE.MeshStandardMaterial({ color: color });
+        const wall = new THREE.Mesh(geometry, material);
+        wall.position.set(position.x, position.y, position.z);
+        return wall;
+      }
+
+      const wall1 = createWall(20, 10, 0.5, 0xffffff, { x: 0, y: 5, z: -10 });
+      const wall2 = createWall(0.5, 10, 20, 0xffffff, { x: -10, y: 5, z: 0 });
+      const wall3 = createWall(0.5, 10, 20, 0xffffff, { x: 10, y: 5, z: 0 });
+      const wall4 = createWall(20, 10, 0.5, 0xffffff, { x: 0, y: 5, z: 10 });
+
+      scene.add(wall1);
+      scene.add(wall2);
+      scene.add(wall3);
+      scene.add(wall4);
+
+      // Couch setup
+      function createCouch() {
+        const couchGeometry = new THREE.BoxGeometry(5, 1, 2);
+        const couchMaterial = new THREE.MeshStandardMaterial({
+          color: 0x8b4513,
+        });
+        const couch = new THREE.Mesh(couchGeometry, couchMaterial);
+        couch.position.set(-3, 1, 0);
+        return couch;
+      }
+
+      const couch1 = createCouch();
+      const couch2 = createCouch();
+      couch2.rotation.y = Math.PI / 2;
+      couch2.position.set(0, 1, -3);
+
+      scene.add(couch1);
+      scene.add(couch2);
+
+      // TV setup
+      const tvGeometry = new THREE.BoxGeometry(4, 2.5, 0.2);
+      const tvMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 });
+      const tv = new THREE.Mesh(tvGeometry, tvMaterial);
+      tv.position.set(6, 2.5, -9.8);
+
+      scene.add(tv);
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      // Responsive design
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

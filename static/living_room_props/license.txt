@@ -1,0 +1,11 @@
+Model Information:
+* title:	Living Room Props
+* source:	https://sketchfab.com/3d-models/living-room-props-cee72686f7534fdea99ab04d6177df22
+* author:	Nicolai Kilstrup (https://sketchfab.com/nkilstrup)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Living Room Props" (https://sketchfab.com/3d-models/living-room-props-cee72686f7534fdea99ab04d6177df22) by Nicolai Kilstrup (https://sketchfab.com/nkilstrup) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
